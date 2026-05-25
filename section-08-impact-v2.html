@@ -1,0 +1,423 @@
+<!--
+  ============================================================
+  SECTION 08 · IMPACT  (v2 — horizontal heading, 4-across tiles)
+  Drop-in replacement for the placeholder section.
+  ============================================================
+-->
+
+<style>
+  /* ---------- Section-scoped variables ---------- */
+  .impact-section {
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-mute: #8a8a8a;
+    --paper: #f4f5f5;
+    --card: #ffffff;
+    --accent: #a3361f;
+    --accent-soft: #d97757;
+    --rule: #e6e3df;
+    --rule-soft: #efedea;
+    --baseline: #6f8a6f;
+  }
+
+  .impact-section {
+    background: var(--paper);
+    padding: 56px 5vw 72px;
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .impact-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Top heading band (horizontal) ---------- */
+  .impact-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .impact-head-left { min-width: 0; }
+
+  .impact-tag {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .impact-title {
+    font-family: "Source Serif Pro", "Lora", Georgia, serif;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.08;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  .impact-lede {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 380px;
+    margin: 0;
+    text-align: right;
+  }
+
+  @media (max-width: 760px) {
+    .impact-head {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 16px;
+    }
+    .impact-lede { text-align: left; }
+  }
+
+  /* ---------- Scenario strip ---------- */
+  .impact-scenario {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+    background: #fbf7f4;
+    border: 1px dashed #e3c9bb;
+    border-radius: 12px;
+    margin-bottom: 18px;
+  }
+
+  .impact-scenario-label {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .impact-scenario-pick {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .impact-scenario-pick strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .impact-scenario-stat {
+    margin-left: auto;
+    font-family: "Source Serif Pro", "Lora", Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .impact-scenario-stat .from {
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    font-weight: 400;
+    margin-left: 6px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* ---------- Four impact tiles (4 across) ---------- */
+  .impact-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  @media (max-width: 1000px) {
+    .impact-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .impact-cards { grid-template-columns: 1fr; }
+  }
+
+  .impact-tile {
+    padding: 18px 18px 16px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: #fff;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .impact-tile:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-soft);
+  }
+
+  .impact-tile-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .impact-tile-icon {
+    width: 16px;
+    height: 16px;
+    stroke: var(--accent);
+    stroke-width: 1.6;
+    fill: none;
+  }
+
+  .impact-tile-stat {
+    font-family: "Source Serif Pro", "Lora", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .impact-tile-stat .unit {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--ink-mute);
+    margin-left: 4px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .impact-tile-baseline {
+    font-size: 11.5px;
+    color: var(--baseline);
+    margin-bottom: 10px;
+  }
+
+  .impact-tile-baseline::before {
+    content: "↑ ";
+    font-weight: 700;
+  }
+
+  .impact-tile-desc {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+    flex: 1;
+  }
+
+  .impact-tile-cite {
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    font-style: italic;
+    border-top: 1px dotted var(--rule);
+    padding-top: 8px;
+  }
+
+  /* ---------- Equity kicker ---------- */
+  .impact-equity {
+    padding: 18px 22px;
+    border-left: 3px solid var(--accent);
+    background: #fbf7f4;
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 14px;
+  }
+
+  .impact-equity-tag {
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .impact-equity-text {
+    font-family: "Source Serif Pro", "Lora", Georgia, serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+
+  .impact-equity-text em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .impact-equity-cite {
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    font-style: italic;
+  }
+
+  /* ---------- Footnote pill ---------- */
+  .impact-footnote {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #f1ede9;
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .impact-reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .impact-reveal.is-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .impact-cards .impact-tile.impact-reveal:nth-child(1) { transition-delay: 0.05s; }
+  .impact-cards .impact-tile.impact-reveal:nth-child(2) { transition-delay: 0.13s; }
+  .impact-cards .impact-tile.impact-reveal:nth-child(3) { transition-delay: 0.21s; }
+  .impact-cards .impact-tile.impact-reveal:nth-child(4) { transition-delay: 0.29s; }
+</style>
+
+<section class="impact-section" id="impact">
+  <div class="impact-wrap">
+
+    <!-- ===== Horizontal heading band ===== -->
+    <div class="impact-head">
+      <div class="impact-head-left">
+        <div class="impact-tag">08 · IMPACT</div>
+        <h2 class="impact-title">What would those extra hot days change?</h2>
+      </div>
+      <p class="impact-lede">
+        A hotter year isn't just a redder map. It shows up in your sleep, your child's report card, your power bill, and your local ER.
+      </p>
+    </div>
+
+    <!-- ===== Scenario strip ===== -->
+    <div class="impact-scenario impact-reveal">
+      <div>
+        <div class="impact-scenario-label">SCENARIO</div>
+        <div class="impact-scenario-pick">
+          <strong>California</strong> · <strong>2050</strong> · SSP3-7.0
+        </div>
+      </div>
+      <div class="impact-scenario-stat">
+        47 days
+        <span class="from">vs ~12 today</span>
+      </div>
+    </div>
+
+    <!-- ===== Four impact tiles (4 across) ===== -->
+    <div class="impact-cards">
+
+      <div class="impact-tile impact-reveal">
+        <div class="impact-tile-head">
+          <svg class="impact-tile-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-linejoin="round"/>
+          </svg>
+          SLEEP
+        </div>
+        <div class="impact-tile-stat">−11<span class="unit">hrs / yr</span></div>
+        <div class="impact-tile-baseline">from −3 hrs today</div>
+        <p class="impact-tile-desc">
+          Warm nights shorten sleep. By 2099 the gap could double — the West Coast hit roughly twice as hard as inland regions.
+        </p>
+        <div class="impact-tile-cite">Minor et al. (2022), <i>One Earth</i></div>
+      </div>
+
+      <div class="impact-tile impact-reveal">
+        <div class="impact-tile-head">
+          <svg class="impact-tile-icon" viewBox="0 0 24 24">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke-linejoin="round"/>
+            <path d="M6 12v5c0 1.66 4 3 6 3s6-1.34 6-3v-5" stroke-linejoin="round"/>
+          </svg>
+          LEARNING
+        </div>
+        <div class="impact-tile-stat">−5%<span class="unit">school yr</span></div>
+        <div class="impact-tile-baseline">from −1% today</div>
+        <p class="impact-tile-desc">
+          Days above 90°F lower PSAT scores. Without AC the loss is ~30% larger, and 3× larger for Black and Hispanic students.
+        </p>
+        <div class="impact-tile-cite">Park, Goodman, Hurwitz &amp; Smith (2020), <i>AEJ</i></div>
+      </div>
+
+      <div class="impact-tile impact-reveal">
+        <div class="impact-tile-head">
+          <svg class="impact-tile-icon" viewBox="0 0 24 24">
+            <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" stroke-linejoin="round"/>
+          </svg>
+          COOLING COST
+        </div>
+        <div class="impact-tile-stat">+$200<span class="unit">/ summer</span></div>
+        <div class="impact-tile-baseline">from current bills</div>
+        <p class="impact-tile-desc">
+          AC alone can add $72–$108 a month per household — and 1 in 5 low-income U.S. households have no AC at all.
+        </p>
+        <div class="impact-tile-cite">U.S. EIA (2024)</div>
+      </div>
+
+      <div class="impact-tile impact-reveal">
+        <div class="impact-tile-head">
+          <svg class="impact-tile-icon" viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linejoin="round"/>
+          </svg>
+          ER VISITS
+        </div>
+        <div class="impact-tile-stat">+35k<span class="unit">/ summer</span></div>
+        <div class="impact-tile-baseline">from observed baseline</div>
+        <p class="impact-tile-desc">
+          Hot days drive cardiovascular, respiratory, and mental-health ER visits — costing ~$1B per summer nationally.
+        </p>
+        <div class="impact-tile-cite">Stanford / UCSD (2025); Nori-Sarma (2022)</div>
+      </div>
+
+    </div>
+
+    <!-- ===== Equity kicker ===== -->
+    <div class="impact-equity impact-reveal">
+      <div class="impact-equity-tag">BUT NOT EVERYONE FEELS IT EQUALLY</div>
+      <p class="impact-equity-text">
+        Low-income students lose <em>3×</em> more learning. Outdoor workers lose <em>14%</em> of their labor capacity above 90°F. <em>1 in 5</em> households can't afford to turn on AC. Climate change doesn't hit a country — it hits the people least equipped to cool down.
+      </p>
+      <div class="impact-equity-cite">
+        Park et al. (2020); HEAT-SHIELD (2020); EIA (2024)
+      </div>
+    </div>
+
+    <div class="impact-footnote">
+      Scenario: California · 2050 · CMIP6 SSP3-7.0 ensemble median.
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Reveal-on-scroll for the impact section
+  (function () {
+    const els = document.querySelectorAll('.impact-section .impact-reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('is-in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+  })();
+</script>
